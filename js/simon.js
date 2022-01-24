@@ -12,3 +12,7 @@ for (let i = 0; i < 5; i++){
     message += ' ' + randomNumber;
 }
 alert(message);
+
+setTimeout(() => {
+    console.log('Test');
+}, 10000);
