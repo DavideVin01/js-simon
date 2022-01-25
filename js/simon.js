@@ -11,8 +11,10 @@ let randomNumbersArray = [];
 
 for (let i = 0; i < 5; i++){
     const randomNumber = getRandomNumber(1, 100);
-    randomNumbersArray.push(randomNumber);
-    message += ' ' + randomNumber;
+    if (randomNumbersArray.includes(randomNumber)){
+        randomNumbersArray.push(randomNumber);
+        message += ' ' + randomNumber;
+    }
 }
 console.log(randomNumbersArray);
 alert(message);
