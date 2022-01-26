@@ -3,39 +3,34 @@
 // Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite prompt().
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri  sono stati indovinati dall'utente.
 
-// Generare 5 numeri casuali e mostrarli in un alert all'utente.
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const min = 1;
+const max = 100;
+const total = 5;
+  
+const numbers = getRandomUniqueNumbers(min, max, total);
 
-let message = 'Memorizza questi numeri:';
-let randomNumbersArray = [];
+console.log(numbers);
 
-for (let i = 0; i < 5; i++){
-    const randomNumber = getRandomNumber(1, 100);
-    // if (randomNumber.includes(randomNumbersArray)){
-    // }
-    randomNumbersArray.push(randomNumber);
-    message += ' ' + randomNumber;
-}
+alert(numbers);
 
-console.log(randomNumbersArray);
-alert(message);
+const userNumbers = [];
+const correctNumbers = [];
 
-// Dall'ok  parte un timer di 30 secondi
-let askedNumbers;
-let isValid = false;
-let userNumbers = [];
 setTimeout(() => {
-    // Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite prompt().
-    for (let i = 0; i < 5; i++){
-        const askNumber = parseInt(prompt('Inserisci uno dei numeri:'));
-        askedNumbers += ' ' + askNumber;
-        userNumbers.push(askNumber);
+    while (userNumbers.length < total){
+        const askNumber = getUserNumber(min, max);
+        if(userNumbers.includes(askNumber)) {
+            alert('Hai già scelto questo numero');
+        } else {
+            userNumbers.push(askNumber);
+            if (numbers.includes(askNumber)) correctNumbers.push(askNumber);
+        }
     }
-    console.log(askedNumbers)
-    // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri  sono stati indovinati dall'utente.
-    if (userNumbers === randomNumbersArray){
-        console.log('OK');
-    } else {
-        console.log('No');
+    
+    let verifyMessage = 'Non hai indovinato nessun numero.';
+    
+    if (correctNumbers.length){
+        verifyMessage = `Hai indovinato ${correctNumbers.length} numeri: ${correctNumbers}`;
     }
-}, 1000);
+    alert(verifyMessage);
+}, 3000);
